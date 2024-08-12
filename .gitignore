@@ -1,4 +1,2 @@
-calibrationCalc
-*.o
-input
-ideas.txt
+problem*[123456789]
+build/
