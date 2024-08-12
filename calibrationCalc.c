@@ -10,7 +10,7 @@
 
 int main() {
     int calib_sum, add, i;
-    char line[LINE_LEN], *first, *tmp;
+    char c, line[LINE_LEN], *first, *tmp;
     char *digs[] = {
         "one",
         "two",
@@ -26,6 +26,8 @@ int main() {
     calib_sum=0;
 
     while (fgets(line, LINE_LEN, stdin) != NULL) {
+        add = 0;
+
         /* Get the first digit */
         first = strpbrk(line, "123456789");
         for (i = 0; i < NUM_DIGS; i++) {
@@ -52,6 +54,58 @@ int main() {
                         break;
             default:    printf("Err: default switch statement finding first");
                         return 1;
+        }
+        calib_sum += add;
+        
+        /* Find last digit in line */
+        add = 0;
+        i = ((int) strlen(line)) - 1;
+        while (i >= 0) {
+            if ((c = line[i]) <= 57 && c >= 48) {
+                add = ((int) c - 48);
+                break;
+            } else switch (c) {
+                case 'o': if (!strncmp(line+i, "one", 3)) {
+                              add = 1;
+                              i = -1;
+                          }
+                          break;
+                case 't': if (!strncmp(line+i, "two", 3)) {
+                              add = 2;
+                              i = -1;
+                          } else if (!strncmp(line+i, "three", 5)) {
+                              add = 3;
+                              i = -1;
+                          }
+                          break;
+                case 'f': if (!strncmp(line+i, "four", 4)) {
+                              add = 4;
+                              i = -1;
+                          } else if (!strncmp(line+i, "five", 4)) {
+                              add = 5;
+                              i = -1;
+                          }
+                          break;
+                case 's': if (!strncmp(line+i, "six", 3)) {
+                              add = 6;
+                              i = -1;
+                          } else if (!strncmp(line+i, "seven", 5)) {
+                              add = 7;
+                              i=-1;
+                          }
+                          break;
+                case 'e': if (!strncmp(line+i, "eight", 5)) {
+                              add = 8;
+                              i=-1;
+                          }
+                          break;
+                case 'n': if (!strncmp(line+i, "nine", 4)) {
+                              add = 9;
+                              i=-1;
+                          }
+                          break;
+            }
+            i--;
         }
         calib_sum += add;
     }
