@@ -19,5 +19,8 @@ day1problem2: day1problem2.o
 day1problem2.o: day1problem2.c
 	$(CC) $(CPPFLAGS) -o $(BUILD_DIR)/day1problem2.o -c day1problem2.c
 
+day2problem1.class: day2problem1.java
+	javac day2problem1.java
+
 clean:
-	rm -f $(BUILD_DIR)/* day*[123456789]problem*[123456789]
+	rm -f $(BUILD_DIR)/* day*[123456789]problem*[123456789] *.class
